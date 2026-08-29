@@ -28,8 +28,9 @@ import com.SmartEduAndConsult.services.GeneralService;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "*")
-public class ApiController {
 
+public class ApiController {
+    
     private final GeneralService service;
 
     public ApiController(GeneralService service) {
@@ -45,7 +46,7 @@ public class ApiController {
     @PostMapping("/usuarios/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> credenciales) {
         return service.login(credenciales.get("email"), credenciales.get("passwordHash"))
-                .<ResponseEntity<?>>map(ResponseEntity::ok)
+                .<ResponseEntity<?>>map(token -> ResponseEntity.ok(Map.of("token", token)))
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas"));
     }
 
@@ -56,26 +57,26 @@ public class ApiController {
     @PostMapping("/servicios")
     public Servicio postServicio(@RequestBody Servicio s) { return service.crearServicio(s); }
 
-    // Reservas (Dispara notificación de correo automáticamente)
+    // Reservas
     @PostMapping("/reservas")
     public ResponseEntity<ReservaCita> postReserva(@RequestBody ReservaCita r) {
         return ResponseEntity.ok(service.crearReserva(r));
     }
 
     @GetMapping("/reservas/usuario/{userId}")
-    public List<ReservaCita> getReservasUsuario(@PathVariable Long userId) { 
-        return service.obtenerReservasPorUsuario(userId); 
+    public List<ReservaCita> getReservasUsuario(@PathVariable Long userId) {
+        return service.obtenerReservasPorUsuario(userId);
     }
 
-    // Compromisos (Punto de integración con IA)
+    // Compromisos
     @PostMapping("/compromisos")
-    public SeguimientoCompromiso postCompromiso(@RequestBody SeguimientoCompromiso sc) { 
-        return service.guardarCompromiso(sc); 
+    public SeguimientoCompromiso postCompromiso(@RequestBody SeguimientoCompromiso sc) {
+        return service.guardarCompromiso(sc);
     }
 
     @GetMapping("/compromisos/reserva/{reservaId}")
-    public SeguimientoCompromiso getCompromiso(@PathVariable Long reservaId) { 
-        return service.obtenerCompromisoPorReserva(reservaId); 
+    public SeguimientoCompromiso getCompromiso(@PathVariable Long reservaId) {
+        return service.obtenerCompromisoPorReserva(reservaId);
     }
 
     // Recursos Educativos y Herramientas
@@ -91,7 +92,7 @@ public class ApiController {
         return ResponseEntity.ok(service.procesarPago(p));
     }
 
-    // Chat (Usuarios <-> Asesores)
+    // Chat
     @PostMapping("/chat/enviar")
     public ResponseEntity<MensajeChat> enviarMensaje(@RequestBody MensajeChat mensaje) {
         return ResponseEntity.ok(service.enviarMensaje(mensaje));

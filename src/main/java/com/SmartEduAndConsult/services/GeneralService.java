@@ -3,6 +3,7 @@ package com.SmartEduAndConsult.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.SmartEduAndConsult.models.ArticuloBlog;
@@ -23,10 +24,11 @@ import com.SmartEduAndConsult.repositories.ReservaCitaRepository;
 import com.SmartEduAndConsult.repositories.SeguimientoCompromisoRepository;
 import com.SmartEduAndConsult.repositories.ServicioRepository;
 import com.SmartEduAndConsult.repositories.UsuarioRepository;
+import com.SmartEduAndConsult.security.JwtUtil;
 
 @Service
 public class GeneralService {
-
+    
     private final UsuarioRepository usuarioRepo;
     private final ServicioRepository servicioRepo;
     private final ReservaCitaRepository reservaRepo;
@@ -37,12 +39,19 @@ public class GeneralService {
     private final ArticuloBlogRepository articuloRepo;
     private final DonacionRepository donacionRepo;
     private final EmailService emailService;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
-    public GeneralService(UsuarioRepository u, ServicioRepository s, ReservaCitaRepository r, 
-                          SeguimientoCompromisoRepository sc, RecursoEducativoRepository re, 
-                          PagoRepository p, MensajeChatRepository chatRepo, 
-                          ArticuloBlogRepository articuloRepo, DonacionRepository donacionRepo,
-                          EmailService emailService) {
+    public GeneralService(UsuarioRepository u, ServicioRepository s,
+                          ReservaCitaRepository r,
+                          SeguimientoCompromisoRepository sc,
+                          RecursoEducativoRepository re,
+                          PagoRepository p, MensajeChatRepository chatRepo,
+                          ArticuloBlogRepository articuloRepo,
+                          DonacionRepository donacionRepo,
+                          EmailService emailService,
+                          PasswordEncoder passwordEncoder,
+                          JwtUtil jwtUtil) {
         this.usuarioRepo = u;
         this.servicioRepo = s;
         this.reservaRepo = r;
@@ -53,14 +62,24 @@ public class GeneralService {
         this.articuloRepo = articuloRepo;
         this.donacionRepo = donacionRepo;
         this.emailService = emailService;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
     }
 
-    // Usuarios & Autenticación
-    public Usuario registrarUsuario(Usuario u) { return usuarioRepo.save(u); }
-    public Optional<Usuario> login(String email, String passwordHash) {
-        Optional<Usuario> user = usuarioRepo.findByEmail(email);
-        if (user.isPresent() && user.get().getPasswordHash().equals(passwordHash)) {
-            return user;
+    // Usuarios & Autenticación segura con JWT y BCrypt
+    public Usuario registrarUsuario(Usuario u) {
+        u.setPasswordHash(passwordEncoder.encode(u.getPasswordHash()));
+        return usuarioRepo.save(u);
+    }
+
+    public Optional<String> login(String email, String rawPassword) {
+        Optional<Usuario> userOpt = usuarioRepo.findByEmail(email);
+        if (userOpt.isPresent()) {
+            Usuario user = userOpt.get();
+            if (passwordEncoder.matches(rawPassword, user.getPasswordHash())) {
+                String token = jwtUtil.generateToken(user.getEmail());
+                return Optional.of(token);
+            }
         }
         return Optional.empty();
     }
@@ -69,24 +88,30 @@ public class GeneralService {
     public List<Servicio> listarServicios() { return servicioRepo.findAll(); }
     public Servicio crearServicio(Servicio s) { return servicioRepo.save(s); }
 
-    // Reservas + Notificación automática de Correo (Requerimiento PDF)
+    // Reservas + Notificación automática de Correo
     public ReservaCita crearReserva(ReservaCita r) {
         ReservaCita guardada = reservaRepo.save(r);
         Usuario u = usuarioRepo.findById(r.getUsuario().getId()).orElse(null);
         if (u != null) {
             emailService.enviarConfirmacionReserva(
-                u.getEmail(), 
+                u.getEmail(),
                 "Tu reserva de cita ID #" + guardada.getId() + " ha sido registrada con éxito."
             );
         }
         return guardada;
     }
-    public List<ReservaCita> obtenerReservasPorUsuario(Long userId) { return reservaRepo.findByUsuarioId(userId); }
+
+    public List<ReservaCita> obtenerReservasPorUsuario(Long userId) {
+        return reservaRepo.findByUsuarioId(userId);
+    }
 
     // Compromisos
-    public SeguimientoCompromiso guardarCompromiso(SeguimientoCompromiso sc) { return compromisoRepo.save(sc); }
-    public SeguimientoCompromiso obtenerCompromisoPorReserva(Long reservaId) { 
-        return compromisoRepo.findByReservaCitaId(reservaId).orElse(null); 
+    public SeguimientoCompromiso guardarCompromiso(SeguimientoCompromiso sc) {
+        return compromisoRepo.save(sc);
+    }
+
+    public SeguimientoCompromiso obtenerCompromisoPorReserva(Long reservaId) {
+        return compromisoRepo.findByReservaCitaId(reservaId).orElse(null);
     }
 
     // Recursos Educativos & Herramientas
@@ -96,16 +121,16 @@ public class GeneralService {
     // Pagos
     public Pago procesarPago(Pago pago) { return pagoRepo.save(pago); }
 
-    // Chat entre Usuarios y Asesores (Requerimiento PDF)
+    // Chat entre Usuarios y Asesores
     public MensajeChat enviarMensaje(MensajeChat mensaje) { return chatRepo.save(mensaje); }
-    public List<MensajeChat> obtenerConversacion(Long user1, Long user2) { 
-        return chatRepo.obtenerConversacion(user1, user2); 
+    public List<MensajeChat> obtenerConversacion(Long user1, Long user2) {
+        return chatRepo.obtenerConversacion(user1, user2);
     }
 
-    // Artículos / Blog (Requerimiento PDF)
+    // Artículos / Blog
     public List<ArticuloBlog> listarArticulos() { return articuloRepo.findAll(); }
     public ArticuloBlog crearArticulo(ArticuloBlog a) { return articuloRepo.save(a); }
 
-    // Donaciones (Requerimiento PDF)
+    // Donaciones
     public Donacion registrarDonacion(Donacion d) { return donacionRepo.save(d); }
 }
