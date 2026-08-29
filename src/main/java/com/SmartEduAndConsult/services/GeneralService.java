@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.SmartEduAndConsult.models.ArticuloBlog;
 import com.SmartEduAndConsult.models.Donacion;
+import com.SmartEduAndConsult.models.Enums;
 import com.SmartEduAndConsult.models.MensajeChat;
 import com.SmartEduAndConsult.models.Pago;
 import com.SmartEduAndConsult.models.RecursoEducativo;
@@ -119,7 +120,23 @@ public class GeneralService {
     public RecursoEducativo crearRecurso(RecursoEducativo r) { return recursoRepo.save(r); }
 
     // Pagos
-    public Pago procesarPago(Pago pago) { return pagoRepo.save(pago); }
+    // Dentro de com/SmartEduAndConsult/services/GeneralService.java
+
+    public Pago procesarPago(Pago pago) {
+        // Si no viene un estado definido, por defecto lo dejamos como PENDIENTE o EXITOSO según tu lógica de pasarela
+        if (pago.getEstadoTransaccion() == null) {
+            pago.setEstadoTransaccion(Enums.EstadoPago.EXITOSO); 
+        }
+        pago.setFechaPago(java.time.LocalDateTime.now());
+    
+        // Aquí podrías integrar en el futuro la llamada al SDK de Stripe / Wompi usando sus credenciales
+    
+        return pagoRepo.save(pago);
+    }
+
+    public List<Pago> obtenerPagosPorUsuario(Long usuarioId) {
+        return pagoRepo.findByUsuarioId(usuarioId);
+    }
 
     // Chat entre Usuarios y Asesores
     public MensajeChat enviarMensaje(MensajeChat mensaje) { return chatRepo.save(mensaje); }

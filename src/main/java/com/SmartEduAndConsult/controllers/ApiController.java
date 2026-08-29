@@ -86,10 +86,17 @@ public class ApiController {
     @PostMapping("/recursos")
     public RecursoEducativo postRecurso(@RequestBody RecursoEducativo r) { return service.crearRecurso(r); }
 
+    // Dentro de com/SmartEduAndConsult/controllers/ApiController.java
+
     // Pagos
     @PostMapping("/pagos")
     public ResponseEntity<Pago> postPago(@RequestBody Pago p) {
         return ResponseEntity.ok(service.procesarPago(p));
+    }
+
+    @GetMapping("/pagos/usuario/{userId}")
+    public ResponseEntity<List<Pago>> getPagosUsuario(@PathVariable Long userId) {
+        return ResponseEntity.ok(service.obtenerPagosPorUsuario(userId));
     }
 
     // Chat
