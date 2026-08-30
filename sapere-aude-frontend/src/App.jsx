@@ -720,118 +720,100 @@ export default function App() {
               <span>WhatsApp</span>
               <span style={{ fontSize: "0.85rem", color: "#94a3b8" }}>Escríbenos directamente</span>
             </a>
-            <a href="https://www.youtube.com/@sapere.aude.asesorias" target="_blank" rel="noopener noreferrer" className="social-box">
-              <span>YouTube</span>
-              <span style={{ fontSize: "0.85rem", color: "#94a3b8" }}>Mira nuestros videos</span>
-            </a>
-            <a href="https://open.spotify.com/show/4fJR9CYem9xfBXkmQqysa5?si=752ccadc8e8a495c" target="_blank" rel="noopener noreferrer" className="social-box">
-              <span>Spotify</span>
-              <span style={{ fontSize: "0.85rem", color: "#94a3b8" }}>Escucha nuestro podcast</span>
-            </a>
-            <a href="https://www.facebook.com/asesorias.academicas.sapere.aude" target="_blank" rel="noopener noreferrer" className="social-box">
-              <span>Facebook</span>
-              <span style={{ fontSize: "0.85rem", color: "#94a3b8" }}>Únete a nuestra página</span>
-            </a>
-            <a href="https://sapereaudeasesoriasacademicas.blogspot.com/" target="_blank" rel="noopener noreferrer" className="social-box">
-              <span>Blog Oficial</span>
-              <span style={{ fontSize: "0.85rem", color: "#94a3b8" }}>Lee nuestras publicaciones</span>
-            </a>
           </div>
         </div>
       )}
 
       {/* VISTA DONACIONES */}
       {vistaActual === "donaciones" && (
-        <div className="section" style={{ maxWidth: "800px", margin: "0 auto", textAlign: "center" }}>
-          <h2>Donaciones</h2>
-          <p className="section-subtitle" style={{ textAlign: "justify", lineHeight: "1.6" }}>
-            En el vasto paisaje del conocimiento, cada mente es un universo por explorar. En Sapere Aude asesorías académicas, nos comprometemos a desvelar los secretos de ese universo, a guiar a cada estudiante hacia la luz del entendimiento y el éxito académico. Para seguir expandiendo nuestros horizontes y llegar a más personas sedientas de saber, necesitamos tu apoyo. Únete a nosotros en esta noble misión de cultivar mentes brillantes y juntos construyamos un futuro lleno de oportunidades y aprendizaje sin límites. ¡Tu donación es la llave que abre las puertas del conocimiento para muchos más! Puedes hacer tu donación a través de:
-          </p>
-          
-          <div className="card-grid" style={{ marginTop: "2rem" }}>
-            {/* Tarjeta 1: PayPal */}
-            <div className="card" style={{ padding: "2rem", textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-              <div>
-                <h3 style={{ color: "#38bdf8", marginBottom: "1rem" }}>PayPal</h3>
-                <p style={{ color: "#94a3b8", marginBottom: "1.5rem" }}>Apóyanos de forma segura internacionalmente.</p>
-              </div>
-              <a href="https://paypal.me/adrianas96?country.x=CO&locale.x=fr_XC" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ textDecoration: "none" }}>
-                Donar por PayPal ↗
-              </a>
-            </div>
-
-            {/* Tarjeta 2: Nequi */}
-            <div className="card" style={{ padding: "2rem", textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-              <div>
-                <h3 style={{ color: "#38bdf8", marginBottom: "1rem" }}>Nequi</h3>
-                <p style={{ color: "#94a3b8", marginBottom: "1rem" }}>Escanea el código QR para aportar mediante Nequi:</p>
-                <img 
-                  src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgVPZQ72I1blV7pxyfgc96zw07IXg3ug4M6N4Ye1nvJrs8VHLVDDErPym2vpM_ssPhz5vCqR8ZMSrQ29gx3F4hcXRyCW7x8vsJw2yoqT0sVDwyHnSW2lXlviFQR_B_hqsizSsfTEDOp8opnhXUGb1YNwzALad7ps4PUylMugWnGm_oPida4FKN4NEWgAWRl/s633/793f1d7b-26b0-4f5f-b5df-fb04af5255af.jpg" 
-                  alt="QR Nequi" 
-                  style={{ maxWidth: "200px", width: "100%", borderRadius: "8px", margin: "0.5rem auto", display: "block" }}
-                />
-              </div>
-            </div>
-
-            {/* Tarjeta 3: Vaki */}
-            <div className="card" style={{ padding: "2rem", textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-              <div>
-                <h3 style={{ color: "#38bdf8", marginBottom: "1rem" }}>Vaki</h3>
-                <p style={{ color: "#94a3b8", marginBottom: "1.5rem" }}>Participa en nuestra Vaki oficial.</p>
-              </div>
-              <a href="https://vaki.co/es/vaki/zmSOUsnBeUAt0Tvat4Z1?utm_source=copy&utm_medium=vaki-page&utm_campaign=v4" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ textDecoration: "none" }}>
-                Donar por Vaki ↗
-              </a>
-            </div>
+        <div className="section">
+          <h2>Apoya Nuestro Proyecto</h2>
+          <p className="section-subtitle">Tu contribución nos ayuda a mantener y expandir nuestros recursos educativos gratuitos.</p>
+          <div className="card" style={{ textAlign: "center", padding: "2rem" }}>
+            <p>Puedes apoyar nuestro contenido y el desarrollo de herramientas mediante aporte voluntario.</p>
+            <a 
+              href="https://link.mercadopago.com.co/sapereaude" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="btn-primary"
+              style={{ display: "inline-block", marginTop: "1rem", textDecoration: "none" }}
+            >
+              Donar con Mercado Pago ↗
+            </a>
           </div>
         </div>
       )}
 
       {/* VISTA LOGIN */}
       {vistaActual === "login" && (
-        <div className="section" style={{ maxWidth: "400px", margin: "2rem auto" }}>
+        <div className="section auth-section">
           <h2>Iniciar Sesión</h2>
-          {mensaje && <p style={{ color: "#38bdf8", textAlign: "center" }}>{mensaje}</p>}
-          <form onSubmit={handleLogin} className="card" style={{ display: "flex", flexDirection: "column", gap: "1rem", padding: "2rem" }}>
-            <div>
-              <label style={{ display: "block", marginBottom: "0.5rem", color: "#cbd5e1" }}>Correo Electrónico</label>
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required style={{ width: "100%", padding: "0.75rem", borderRadius: "8px", border: "1px solid #334155", background: "#0f172a", color: "#fff" }} />
+          {mensaje && <p className="auth-mensaje">{mensaje}</p>}
+          <form onSubmit={handleLogin} className="auth-form">
+            <div className="form-group">
+              <label>Correo Electrónico</label>
+              <input 
+                type="email" 
+                value={email} 
+                onChange={(e) => setEmail(e.target.value)} 
+                required 
+              />
             </div>
-            <div>
-              <label style={{ display: "block", marginBottom: "0.5rem", color: "#cbd5e1" }}>Contraseña</label>
-              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required style={{ width: "100%", padding: "0.75rem", borderRadius: "8px", border: "1px solid #334155", background: "#0f172a", color: "#fff" }} />
+            <div className="form-group">
+              <label>Contraseña</label>
+              <input 
+                type="password" 
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)} 
+                required 
+              />
             </div>
-            <button type="submit" className="btn-primary" style={{ width: "100%", marginTop: "1rem" }}>Entrar</button>
-            <p style={{ textAlign: "center", marginTop: "1rem", color: "#94a3b8", fontSize: "0.9rem" }}>
-              ¿No tienes cuenta? <span style={{ color: "#38bdf8", cursor: "pointer" }} onClick={() => setVistaActual("registro")}>Regístrate aquí</span>
-            </p>
+            <button type="submit" className="btn-primary">Entrar</button>
           </form>
+          <p style={{ marginTop: "1rem", textAlign: "center" }}>
+            ¿No tienes cuenta? <button onClick={() => setVistaActual("registro")} style={{ background: "none", border: "none", color: "#38bdf8", cursor: "pointer" }}>Regístrate aquí</button>
+          </p>
         </div>
       )}
 
       {/* VISTA REGISTRO */}
       {vistaActual === "registro" && (
-        <div className="section" style={{ maxWidth: "400px", margin: "2rem auto" }}>
+        <div className="section auth-section">
           <h2>Registro de Usuario</h2>
-          {mensaje && <p style={{ color: "#38bdf8", textAlign: "center" }}>{mensaje}</p>}
-          <form onSubmit={handleRegistro} className="card" style={{ display: "flex", flexDirection: "column", gap: "1rem", padding: "2rem" }}>
-            <div>
-              <label style={{ display: "block", marginBottom: "0.5rem", color: "#cbd5e1" }}>Nombre Completo</label>
-              <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} required style={{ width: "100%", padding: "0.75rem", borderRadius: "8px", border: "1px solid #334155", background: "#0f172a", color: "#fff" }} />
+          {mensaje && <p className="auth-mensaje">{mensaje}</p>}
+          <form onSubmit={handleRegistro} className="auth-form">
+            <div className="form-group">
+              <label>Nombre</label>
+              <input 
+                type="text" 
+                value={nombre} 
+                onChange={(e) => setNombre(e.target.value)} 
+                required 
+              />
             </div>
-            <div>
-              <label style={{ display: "block", marginBottom: "0.5rem", color: "#cbd5e1" }}>Correo Electrónico</label>
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required style={{ width: "100%", padding: "0.75rem", borderRadius: "8px", border: "1px solid #334155", background: "#0f172a", color: "#fff" }} />
+            <div className="form-group">
+              <label>Correo Electrónico</label>
+              <input 
+                type="email" 
+                value={email} 
+                onChange={(e) => setEmail(e.target.value)} 
+                required 
+              />
             </div>
-            <div>
-              <label style={{ display: "block", marginBottom: "0.5rem", color: "#cbd5e1" }}>Contraseña</label>
-              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required style={{ width: "100%", padding: "0.75rem", borderRadius: "8px", border: "1px solid #334155", background: "#0f172a", color: "#fff" }} />
+            <div className="form-group">
+              <label>Contraseña</label>
+              <input 
+                type="password" 
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)} 
+                required 
+              />
             </div>
-            <button type="submit" className="btn-primary" style={{ width: "100%", marginTop: "1rem" }}>Registrarse</button>
-            <p style={{ textAlign: "center", marginTop: "1rem", color: "#94a3b8", fontSize: "0.9rem" }}>
-              ¿Ya tienes cuenta? <span style={{ color: "#38bdf8", cursor: "pointer" }} onClick={() => setVistaActual("login")}>Inicia sesión</span>
-            </p>
+            <button type="submit" className="btn-primary">Registrarse</button>
           </form>
+          <p style={{ marginTop: "1rem", textAlign: "center" }}>
+            ¿Ya tienes cuenta? <button onClick={() => setVistaActual("login")} style={{ background: "none", border: "none", color: "#38bdf8", cursor: "pointer" }}>Inicia sesión</button>
+          </p>
         </div>
       )}
     </div>
