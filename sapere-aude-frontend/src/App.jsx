@@ -526,7 +526,7 @@ export default function App() {
   return (
     <div className="app-container">
       <nav className="navbar">
-        <div className="nav-brand" onClick={() => setVistaActual("home")}>
+        <div className="nav-brand" onClick={() => setVistaActual("home")} style={{ cursor: "pointer" }}>
           <img 
             src="/logo.png" 
             alt="Sapere Aude E-learning & Consultoría" 
@@ -555,18 +555,18 @@ export default function App() {
       {/* VISTA HOME */}
       {vistaActual === "home" && (
         <div className="home-content">
-          <header className="hero-section">
+          <header className="hero-section" style={{ padding: "4rem 1rem", textAlign: "center" }}>
             <h1>Atrévete a Saber</h1>
-            <p>Plataforma centralizada de consultoría, formación virtual y desarrollo profesional.</p>
-            <button className="btn-primary" onClick={() => setVistaActual("servicios")}>
+            <p style={{ color: "#94a3b8" }}>Plataforma centralizada de consultoría, formación virtual y desarrollo profesional.</p>
+            <button className="btn-primary" onClick={() => setVistaActual("servicios")} style={{ marginTop: "1rem" }}>
               Explorar Servicios
             </button>
           </header>
 
           <section className="section about-section">
             <h2>Nuestra Misión</h2>
-            <div className="card about-card">
-              <p>
+            <div className="card about-card" style={{ background: "#1e293b", padding: "1.5rem", borderRadius: "8px", border: "1px solid #334155", maxWidth: "600px", margin: "1rem auto" }}>
+              <p style={{ color: "#cbd5e1" }}>
                 Proporcionar servicios de asesorías académicas y consultoría organizacional de alta calidad, 
                 orientados al fortalecimiento de las competencias analíticas de estudiantes y equipos de trabajo.
               </p>
@@ -581,22 +581,22 @@ export default function App() {
           <h2>Nuestros Servicios y Líneas de Trabajo</h2>
           <p className="section-subtitle">Haz clic en cada línea para ver el desglose completo.</p>
           
-          <div className="services-container">
+          <div className="services-container" style={{ maxWidth: "800px", margin: "0 auto" }}>
             {listaServicios.map((srv) => (
-              <div key={srv.id} className="service-accordion-card">
+              <div key={srv.id} className="service-accordion-card" style={{ marginBottom: "1rem" }}>
                 <div 
                   className="service-header"
                   onClick={() => setServicioSeleccionado(servicioSeleccionado === srv.id ? null : srv.id)}
                 >
-                  <h3>{srv.titulo}</h3>
+                  <h3 style={{ margin: 0 }}>{srv.titulo}</h3>
                   <span className="toggle-icon">{servicioSeleccionado === srv.id ? "▲" : "▼"}</span>
                 </div>
-                <p className="service-summary">{srv.resumen}</p>
+                <p className="service-summary" style={{ color: "#94a3b8" }}>{srv.resumen}</p>
 
                 {servicioSeleccionado === srv.id && (
-                  <ul className="service-details-list">
+                  <ul className="service-details-list" style={{ textAlign: "left", paddingLeft: "1.2rem", color: "#cbd5e1" }}>
                     {srv.detalles.map((detalle, idx) => (
-                      <li key={idx}>✓ {detalle}</li>
+                      <li key={idx} style={{ margin: "0.4rem 0" }}>✓ {detalle}</li>
                     ))}
                   </ul>
                 )}
@@ -611,16 +611,16 @@ export default function App() {
         <div className="section">
           <h2>Artículos Académicos</h2>
           <p className="section-subtitle">Publicaciones oficiales del blog de la organización.</p>
-          <div className="card-grid">
-            <div className="card article-card">
+          <div className="card-grid" style={{ display: "flex", justifyContent: "center", gap: "1.5rem", flexWrap: "wrap" }}>
+            <div className="card article-card" style={{ background: "#1e293b", padding: "1.5rem", borderRadius: "8px", border: "1px solid #334155", width: "280px" }}>
               <h3>Test de Aldrete</h3>
-              <p>Valoración de la recuperación postanestésica en salud.</p>
-              <a href="https://sapereaudeasesoriasacademicas.blogspot.com/2024/04/test-de-aldrete.html" target="_blank" rel="noopener noreferrer" className="btn-external">Leer Completo ↗</a>
+              <p style={{ color: "#94a3b8" }}>Valoración de la recuperación postanestésica en salud.</p>
+              <a href="https://sapereaudeasesoriasacademicas.blogspot.com/2024/04/test-de-aldrete.html" target="_blank" rel="noopener noreferrer" className="btn-external" style={{ display: "inline-block", marginTop: "1rem", color: "#38bdf8" }}>Leer Completo ↗</a>
             </div>
-            <div className="card article-card">
+            <div className="card article-card" style={{ background: "#1e293b", padding: "1.5rem", borderRadius: "8px", border: "1px solid #334155", width: "280px" }}>
               <h3>El Principito (Resumen y Análisis)</h3>
-              <p>Análisis literario y reflexiones filosóficas.</p>
-              <a href="https://sapereaudeasesoriasacademicas.blogspot.com/2024/04/el-principito.html" target="_blank" rel="noopener noreferrer" className="btn-external">Leer Completo ↗</a>
+              <p style={{ color: "#94a3b8" }}>Análisis literario y reflexiones filosóficas.</p>
+              <a href="https://sapereaudeasesoriasacademicas.blogspot.com/2024/04/el-principito.html" target="_blank" rel="noopener noreferrer" className="btn-external" style={{ display: "inline-block", marginTop: "1rem", color: "#38bdf8" }}>Leer Completo ↗</a>
             </div>
           </div>
         </div>
@@ -631,19 +631,19 @@ export default function App() {
         <div className="section">
           <h2>Herramientas</h2>
           <p className="section-subtitle">A continuación encontrarás herramientas que te facilitarán el desarrollo de tus actividades académicas:</p>
-          <div className="services-container">
+          <div className="services-container" style={{ maxWidth: "800px", margin: "0 auto" }}>
             {listaHerramientas.map((herr) => (
-              <div key={herr.id} className="service-accordion-card">
+              <div key={herr.id} className="service-accordion-card" style={{ marginBottom: "1rem" }}>
                 <div 
                   className="service-header"
                   onClick={() => setHerramientaSeleccionada(herramientaSeleccionada === herr.id ? null : herr.id)}
                 >
-                  <h3>{herr.titulo}</h3>
+                  <h3 style={{ margin: 0 }}>{herr.titulo}</h3>
                   <span className="toggle-icon">{herramientaSeleccionada === herr.id ? "▲" : "▼"}</span>
                 </div>
-                <p className="service-summary">{herr.resumen}</p>
+                <p className="service-summary" style={{ color: "#94a3b8" }}>{herr.resumen}</p>
                 {herramientaSeleccionada === herr.id && (
-                  <div className="accordion-buttons-grid">
+                  <div className="accordion-buttons-grid" style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginTop: "1rem" }}>
                     {herr.items.map((item, idx) => (
                       <a 
                         key={idx} 
@@ -651,7 +651,7 @@ export default function App() {
                         target="_blank" 
                         rel="noopener noreferrer" 
                         className="btn-external"
-                        style={{ background: "#1e293b", padding: "0.5rem 1rem", borderRadius: "6px", border: "1px solid #334155" }}
+                        style={{ background: "#0f172a", padding: "0.5rem 1rem", borderRadius: "6px", border: "1px solid #334155", color: "#38bdf8", textDecoration: "none" }}
                       >
                         {item.nombre} ↗
                       </a>
@@ -669,19 +669,19 @@ export default function App() {
         <div className="section">
           <h2>IA</h2>
           <p className="section-subtitle">Directorio de recursos de Inteligencia Artificial organizados por categoría.</p>
-          <div className="services-container">
+          <div className="services-container" style={{ maxWidth: "800px", margin: "0 auto" }}>
             {listaIAs.map((ia) => (
-              <div key={ia.id} className="service-accordion-card">
+              <div key={ia.id} className="service-accordion-card" style={{ marginBottom: "1rem" }}>
                 <div 
                   className="service-header"
                   onClick={() => setIaSeleccionada(iaSeleccionada === ia.id ? null : ia.id)}
                 >
-                  <h3>{ia.titulo}</h3>
+                  <h3 style={{ margin: 0 }}>{ia.titulo}</h3>
                   <span className="toggle-icon">{iaSeleccionada === ia.id ? "▲" : "▼"}</span>
                 </div>
-                <p className="service-summary">{ia.resumen}</p>
+                <p className="service-summary" style={{ color: "#94a3b8" }}>{ia.resumen}</p>
                 {iaSeleccionada === ia.id && (
-                  <div className="accordion-buttons-grid">
+                  <div className="accordion-buttons-grid" style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginTop: "1rem" }}>
                     {ia.items.map((item, idx) => (
                       <a 
                         key={idx} 
@@ -689,7 +689,7 @@ export default function App() {
                         target="_blank" 
                         rel="noopener noreferrer" 
                         className="btn-external"
-                        style={{ background: "#1e293b", padding: "0.5rem 1rem", borderRadius: "6px", border: "1px solid #334155" }}
+                        style={{ background: "#0f172a", padding: "0.5rem 1rem", borderRadius: "6px", border: "1px solid #334155", color: "#38bdf8", textDecoration: "none" }}
                       >
                         {item.nombre} ↗
                       </a>
@@ -709,37 +709,80 @@ export default function App() {
           <p className="section-subtitle">Conéctate con nosotros a través de nuestras plataformas oficiales.</p>
           <div className="social-grid">
             <a href="https://www.tiktok.com/@sapere.aude.asesorias?_t=ZS-8y6f63JegBb&_r=1" target="_blank" rel="noopener noreferrer" className="social-box">
-              <span>TikTok</span>
+              <span style={{ fontWeight: "bold" }}>TikTok</span>
               <span style={{ fontSize: "0.85rem", color: "#94a3b8" }}>Síguenos en TikTok</span>
             </a>
             <a href="https://www.instagram.com/sapere.aude.asesorias/" target="_blank" rel="noopener noreferrer" className="social-box">
-              <span>Instagram</span>
+              <span style={{ fontWeight: "bold" }}>Instagram</span>
               <span style={{ fontSize: "0.85rem", color: "#94a3b8" }}>Visítanos en Instagram</span>
             </a>
             <a href="https://wa.me/573196188448" target="_blank" rel="noopener noreferrer" className="social-box">
-              <span>WhatsApp</span>
+              <span style={{ fontWeight: "bold" }}>WhatsApp</span>
               <span style={{ fontSize: "0.85rem", color: "#94a3b8" }}>Escríbenos directamente</span>
+            </a>
+            <a href="https://www.youtube.com/@sapere.aude.asesorias" target="_blank" rel="noopener noreferrer" className="social-box">
+              <span style={{ fontWeight: "bold" }}>YouTube</span>
+              <span style={{ fontSize: "0.85rem", color: "#94a3b8" }}>Mira nuestros videos</span>
+            </a>
+            <a href="https://open.spotify.com/show/4fJR9CYem9xfBXkmQqysa5?si=752ccadc8e8a495c" target="_blank" rel="noopener noreferrer" className="social-box">
+              <span style={{ fontWeight: "bold" }}>Spotify</span>
+              <span style={{ fontSize: "0.85rem", color: "#94a3b8" }}>Escucha nuestro podcast</span>
+            </a>
+            <a href="https://www.facebook.com/asesorias.academicas.sapere.aude" target="_blank" rel="noopener noreferrer" className="social-box">
+              <span style={{ fontWeight: "bold" }}>Facebook</span>
+              <span style={{ fontSize: "0.85rem", color: "#94a3b8" }}>Comunidad en Facebook</span>
+            </a>
+            <a href="https://sapereaudeasesoriasacademicas.blogspot.com" target="_blank" rel="noopener noreferrer" className="social-box">
+              <span style={{ fontWeight: "bold" }}>Blog Oficial</span>
+              <span style={{ fontSize: "0.85rem", color: "#94a3b8" }}>Lee nuestros artículos</span>
             </a>
           </div>
         </div>
       )}
 
-      {/* VISTA DONACIONES */}
+      {/* VISTA DONACIONES (Con 3 tarjetas centradas) */}
       {vistaActual === "donaciones" && (
         <div className="section">
           <h2>Apoya Nuestro Proyecto</h2>
           <p className="section-subtitle">Tu contribución nos ayuda a mantener y expandir nuestros recursos educativos gratuitos.</p>
-          <div className="card" style={{ textAlign: "center", padding: "2rem" }}>
-            <p>Puedes apoyar nuestro contenido y el desarrollo de herramientas mediante aporte voluntario.</p>
-            <a 
-              href="https://link.mercadopago.com.co/sapereaude" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="btn-primary"
-              style={{ display: "inline-block", marginTop: "1rem", textDecoration: "none" }}
-            >
-              Donar con Mercado Pago ↗
-            </a>
+          
+          <div className="donaciones-grid">
+            {/* Tarjeta 1: PayPal */}
+            <div className="donacion-card">
+              <h3 style={{ margin: "0 0 0.5rem 0", color: "#38bdf8" }}>PayPal</h3>
+              <p style={{ fontSize: "0.9rem", color: "#94a3b8", flex: 1 }}>Apoya de forma rápida y segura mediante PayPal.</p>
+              <a 
+                href="https://paypal.me/adrianas96?country.x=CO&locale.x=fr_XC" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="btn-primary"
+                style={{ width: "100%", textDecoration: "none", boxSizing: "border-box", textAlign: "center", display: "block" }}
+              >
+                Donar con PayPal ↗
+              </a>
+            </div>
+
+            {/* Tarjeta 2: Código QR (Nequi / Daviplata) */}
+            <div className="donacion-card">
+              <h3>Nequi</h3>
+              <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgVPZQ72I1blV7pxyfgc96zw07IXg3ug4M6N4Ye1nvJrs8VHLVDDErPym2vpM_ssPhz5vCqR8ZMSrQ29gx3F4hcXRyCW7x8vsJw2yoqT0sVDwyHnSW2lXlviFQR_B_hqsizSsfTEDOp8opnhXUGb1YNwzALad7ps4PUylMugWnGm_oPida4FKN4NEWgAWRl/s633/793f1d7b-26b0-4f5f-b5df-fb04af5255af.jpg" alt="QR Nequi" className="donacion-img" />
+              <p>Escanea el código con tu app bancaria.</p>
+            </div>
+
+            {/* Tarjeta 3: Vaki */}
+            <div className="donacion-card">
+              <h3 style={{ margin: "0 0 0.5rem 0", color: "#38bdf8" }}>Vaki</h3>
+              <p style={{ fontSize: "0.9rem", color: "#94a3b8", flex: 1 }}>Participa en nuestra Vaki oficial de recaudación.</p>
+              <a 
+                href="https://vaki.co/es/vaki/zmSOUsnBeUAt0Tvat4Z1?utm_source=copy&utm_medium=vaki-page&utm_campaign=v4" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="btn-primary"
+                style={{ width: "100%", textDecoration: "none", boxSizing: "border-box", textAlign: "center", display: "block" }}
+              >
+                Apoyar en Vaki ↗
+              </a>
+            </div>
           </div>
         </div>
       )}
@@ -770,8 +813,8 @@ export default function App() {
             </div>
             <button type="submit" className="btn-primary">Entrar</button>
           </form>
-          <p style={{ marginTop: "1rem", textAlign: "center" }}>
-            ¿No tienes cuenta? <button onClick={() => setVistaActual("registro")} style={{ background: "none", border: "none", color: "#38bdf8", cursor: "pointer" }}>Regístrate aquí</button>
+          <p style={{ marginTop: "1rem", textAlign: "center", color: "#94a3b8" }}>
+            ¿No tienes cuenta? <button onClick={() => setVistaActual("registro")} style={{ background: "none", border: "none", color: "#38bdf8", cursor: "pointer", textDecoration: "underline" }}>Regístrate aquí</button>
           </p>
         </div>
       )}
@@ -811,8 +854,8 @@ export default function App() {
             </div>
             <button type="submit" className="btn-primary">Registrarse</button>
           </form>
-          <p style={{ marginTop: "1rem", textAlign: "center" }}>
-            ¿Ya tienes cuenta? <button onClick={() => setVistaActual("login")} style={{ background: "none", border: "none", color: "#38bdf8", cursor: "pointer" }}>Inicia sesión</button>
+          <p style={{ marginTop: "1rem", textAlign: "center", color: "#94a3b8" }}>
+            ¿Ya tienes cuenta? <button onClick={() => setVistaActual("login")} style={{ background: "none", border: "none", color: "#38bdf8", cursor: "pointer", textDecoration: "underline" }}>Inicia sesión</button>
           </p>
         </div>
       )}
